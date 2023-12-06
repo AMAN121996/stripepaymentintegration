@@ -1,0 +1,14 @@
+<!-- app/views/products/show.html.erb -->
+
+<h1><%= @product.name %></h1>
+<p><%= @product.price %></p>
+<%= form_tag purchase_product_path(@product), method: :post do %>
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-amount="<%= @product.price * 100 %>"
+          data-name="Stripe Payment Example"
+          data-description="<%= @product.name %>"
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          data-locale="auto">
+  </script>
+<% end %>
